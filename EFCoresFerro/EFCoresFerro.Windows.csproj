@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFCoresFerro.loc\EFCoresFerro.loc.csproj" />
+    <ProjectReference Include="..\EFCoresFerro.Servicios\EFCoresFerro.Servicios.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="frmDeporteAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmGeneroAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmMarcaAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmGenero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmDeporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmZapaAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
