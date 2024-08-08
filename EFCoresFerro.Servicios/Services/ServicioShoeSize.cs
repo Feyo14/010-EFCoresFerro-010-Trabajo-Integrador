@@ -8,42 +8,30 @@ using System.Numerics;
 
 namespace EFCore3.Servicios.Servicios
 {
-    public class ServicioShoes : IServicioShoes
+    public class ServicioShoeSize : IServicioShoeSize
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepositorioShoes repo;
+        private readonly IRepositorioShoeSize repo;
 private readonly EFCoresDbContext _dbContext;
+    
 
-        public ServicioShoes()
-        {
-            _dbContext = new EFCoresDbContext();
-            repo = new RepositorioShoes(_dbContext);
-        }
-
-        public ServicioShoes(IRepositorioShoes repositor)
-        {
-            _dbContext = new EFCoresDbContext();
-            repo = repositor ?? throw new ArgumentNullException(nameof(repositor));
-
-        }
-
-        public ServicioShoes(IRepositorioShoes repositor, IUnitOfWork unitOfWork)
+        public ServicioShoeSize(IRepositorioShoeSize repositor, IUnitOfWork unitOfWork)
         {
             repo = repositor ?? throw new ArgumentNullException(nameof(repositor));
             _unitOfWork = unitOfWork;
             _dbContext = new EFCoresDbContext();
         }
-        public void Agregar(Shoes shoe)
+        public void Agregar(ShoeSize shoe)
         {
             try
             {
                 _unitOfWork.BeginTransaction();
 
-                if (shoe.ShoeId == 0)
+                if (shoe.ShoeSizeId == 0)
                 {
-                    shoe.genre = null;
-                    shoe.sport = null;
-                    shoe.brand = null;
+                    shoe.Size = null;
+                    shoe.Shoe = null;
+                 
                     repo.Agregar(shoe);
                    _unitOfWork.SaveChanges(); // Guardar cambios para obtener el id de la planta agregada
 
@@ -65,21 +53,22 @@ private readonly EFCoresDbContext _dbContext;
             }
         }
 
-        public void Borrar(Shoes s)
+        public void Borrar(ShoeSize s)
         {
             _unitOfWork.BeginTransaction();
 
-            Shoes gInDb = repo.GetShoePorId(s.ShoeId);
+            ShoeSize gInDb = repo.GetShoeSizePorId(s.ShoeSizeId);
             if (gInDb != null)
             {
-                s.sport = null;
-                s.genre = null;
-                s.brand = null;
+                string tex = s.Shoe.Descripcion;
+                s.Size = null;
+                s.Shoe = null;
+              
                 repo.Borrar(gInDb);
                 _unitOfWork.SaveChanges(); // Guardar cambios para confirmar eliminación 
 
                 _unitOfWork.Commit(); // Confirmar los cambios
-                Console.WriteLine($"Shoe:  {gInDb.Descripcion} borrado!!!");
+                Console.WriteLine($"Shoe:  {tex} borrado!!!");
             }
             else
             {
@@ -89,7 +78,7 @@ private readonly EFCoresDbContext _dbContext;
             }
         }
 
-        public void Editar(Shoes s)
+        public void Editar(ShoeSize s)
         {
             _unitOfWork.BeginTransaction();
           
@@ -98,32 +87,25 @@ private readonly EFCoresDbContext _dbContext;
 
         }
 
-        public bool existe(Shoes d)
+        public bool existe(ShoeSize d)
         {
             return repo.existe(d);
         }
 
-        public bool existeShoeSize(int s)
-        {
-            return repo.existeShoeSize(s);
-        }
-
-        public List<Shoes> GetLista()
+        public List<ShoeSize> GetLista()
         {
             
                 return repo.GetLista(); 
             
         }
 
-        public Shoes? GetPorName(string descrip)
+        public ShoeSize? GetShoeSizePorId(int id)
         {
-            return repo.GetPorName(descrip);
-                }
-
-        public Shoes? GetShoePorId(int id)
-        {
-          return   repo.GetShoePorId(id);        }
+          return   repo.GetShoeSizePorId(id);        }
     }
 
-  
+     //   public Paise GetPaisporId(int paisId)
+      //  {
+          //  throw new NotImplementedException();
+       // }
     }

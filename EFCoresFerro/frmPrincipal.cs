@@ -77,5 +77,11 @@ namespace EFCoresFerro.Windows
             frmDeporte frm = new frmDeporte(_serviceProvider.GetService<IServicioDeporte>());
             frm.ShowDialog();
         }
+
+        private void btnshoeSize_Click(object sender, EventArgs e)
+        {
+            frmShoeSize frm = new frmShoeSize(_serviceProvider.GetService<IServicioShoeSize>(),_serviceProvider);
+            frm.ShowDialog();
+        }
     }
 }

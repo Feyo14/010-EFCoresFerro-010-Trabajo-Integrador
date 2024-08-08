@@ -32,6 +32,12 @@
     <Compile Update="frmMarca.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmShoeSizeAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmShoeSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmZapaAE.cs">
       <SubType>Form</SubType>
     </Compile>

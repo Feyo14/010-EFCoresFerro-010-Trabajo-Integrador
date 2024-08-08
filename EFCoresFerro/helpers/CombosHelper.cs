@@ -4,6 +4,7 @@ using EFCoreFerro.Services.Services;
 using EFCoreFerro2.Datos;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Size = EFCore3.Entidades.Size;
 
 
 namespace EFCoresFerro.GUI.Helpers
@@ -220,6 +221,52 @@ namespace EFCoresFerro.GUI.Helpers
             foreach (Sports b in lista)
             {
                 cbo.Items.Add(b.SportName);
+            }
+
+            // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
+            if (lista.Count > 0)
+            {
+                cbo.SelectedIndex = 0;
+
+            }
+        }
+        public static void CargarComboShoes(IServiceProvider serviceProvider, ref ComboBox cbo)
+        {
+            var servicio = serviceProvider.GetService<IServicioShoes>();
+            var lista = servicio.GetLista();
+            var defaultmodel = new Shoes
+            {
+                Descripcion = "Seleccione"
+            };
+            cbo.Items.Clear();
+            lista.Insert(0, defaultmodel);
+            // Agregar los tipos de envases al ToolStripComboBox
+            foreach (Shoes b in lista)
+            {
+                cbo.Items.Add(b.Descripcion);
+            }
+
+            // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
+            if (lista.Count > 0)
+            {
+                cbo.SelectedIndex = 0;
+
+            }
+        }
+        public static void CargarComboSize(IServiceProvider serviceProvider, ref ComboBox cbo)
+        {
+            var servicio = serviceProvider.GetService<IServicioSize>();
+            var lista = servicio.GetLista();
+            var defaultsize = new Size
+            {
+                sizeNumber = 0
+            };
+            cbo.Items.Clear();
+            lista.Insert(0, defaultsize);
+            // Agregar los tipos de envases al ToolStripComboBox
+            foreach (Size b in lista)
+            {
+                cbo.Items.Add(b.sizeNumber);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos

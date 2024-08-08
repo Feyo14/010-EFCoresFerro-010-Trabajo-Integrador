@@ -35,6 +35,9 @@ public partial class EFCoresDbContext : DbContext
 
     public virtual DbSet<Zapatilla> Zapatillas { get; set; }
 
+    public virtual DbSet<Size> Size { get; set; }
+    public virtual DbSet<ShoeSize> ShoeSize { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=.; Initial Catalog=EFCoresFerro; Trusted_Connection=true; TrustServerCertificate=true;");
@@ -163,8 +166,28 @@ public partial class EFCoresDbContext : DbContext
 
             entity.HasOne(d => d.Marca).WithMany(p => p.Zapatillas).HasForeignKey(d => d.MarcaId);
         });
+        modelBuilder.Entity<Size>(entity =>
+        {
+            entity.ToTable("Size");
 
 
+            entity.HasKey(e => e.SizeId);
+            entity.HasIndex(e => e.SizeId, "IX_Size");
+
+            entity.HasIndex(e => e.sizeNumber).IsUnique();
+
+        });
+        modelBuilder.Entity<ShoeSize>(entity =>
+        {
+            entity.ToTable("ShoeSizes");
+
+
+            entity.HasKey(e => e.ShoeSizeId);
+            entity.HasIndex(e => e.QuantityInStock, "IX_QuantityInStock");
+            entity.HasOne(d => d.Shoe).WithMany(p => p.shoesize).HasForeignKey(d => d.ShoeId);
+            entity.HasOne(d => d.Size).WithMany(p => p.shoesize).HasForeignKey(d => d.SizeId);
+
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 

@@ -4,6 +4,7 @@ using EFCoresFerro.Datos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Numerics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EFCore3.DATOS.Repositorio
 {
@@ -95,6 +96,12 @@ namespace EFCore3.DATOS.Repositorio
             p.ShoeId != p.ShoeId);
         }
 
+        public bool existeShoeSize(int s)
+        {
+            return context.ShoeSize.Any(
+                  p => p.ShoeId == s);
+        }
+
         public List<Shoes> GetLista()
         {
             return context.Shoes
@@ -106,6 +113,12 @@ namespace EFCore3.DATOS.Repositorio
                 .ToList();
              //  .OrderBy(p=>p.Price)
         
+        }
+
+        public Shoes? GetPorName(string descrip)
+        {
+            return context.Shoes
+                                     .FirstOrDefault(t => t.Descripcion == descrip);
         }
 
         public Shoes? GetShoePorId(int id)

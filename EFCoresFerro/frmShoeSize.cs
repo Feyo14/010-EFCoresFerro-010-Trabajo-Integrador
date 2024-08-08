@@ -8,12 +8,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCore3Ferro
 {
-    public partial class frmShoes : Form
+    public partial class frmShoeSize : Form
     {
-        private readonly IServicioShoes _servicio;
+        private readonly IServicioShoeSize _servicio;
         private readonly IServiceProvider serviceProvider;
 
-        private List<Shoes> lista;
+        private List<ShoeSize> lista;
+        private IServicioShoeSize? servicioShoeSize;
+
         //#pragma warning disable CS8618 // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
         /*   public frmShoes(IServicioShoes serv,ServiceProvider _serviceProvider)
    #pragma warning restore CS8618 // Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.
@@ -25,7 +27,7 @@ namespace EFCore3Ferro
 
            }
            */
-        public frmShoes(IServicioShoes? serv, IServiceProvider _serviceProvider)
+        public frmShoeSize(IServicioShoeSize? serv, IServiceProvider _serviceProvider)
         {
             serviceProvider = _serviceProvider;
             _servicio = serv;
@@ -33,7 +35,9 @@ namespace EFCore3Ferro
 
         }
 
-        private void frmShoes_Load(object sender, EventArgs e)
+    
+
+        private void frmShoeSize_Load(object sender, EventArgs e)
         {
             RecargarGrilla();
         }
@@ -69,12 +73,13 @@ namespace EFCore3Ferro
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            frmShoesAE frm = new frmShoesAE(serviceProvider);
+
+            frmShoeSizeAE frm = new frmShoeSizeAE(serviceProvider);
             DialogResult df = frm.ShowDialog(this);
             if (df == DialogResult.Cancel) { return; }
             try
             {
-                Shoes g = frm.GetShoe();
+                ShoeSize g = frm.GetShoe();
 
                 if (!_servicio.existe(g))
                 {
@@ -102,11 +107,9 @@ namespace EFCore3Ferro
                 MessageBox.Show(ex.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+
             }
-            RecargarGrilla();
-
-        }
-
+        } 
         private void tsbBorrar_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
@@ -117,33 +120,11 @@ namespace EFCore3Ferro
             else
             {
                 var r = dataGridView1.SelectedRows[0];
-                Shoes ss = (Shoes)r.Tag;
-                var s = _servicio.GetShoePorId(ss.ShoeId);
-                if (_servicio.existeShoeSize(ss.ShoeId))
-                {
-                  DialogResult dr=  MessageBox.Show("Alto el Shoe que quiere borrar se encuentra en la tabla Shoe Size desea continuar y borrar todo?",
-                       "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); 
-
-                    if (dr == DialogResult.Yes)
-                    {
-                        _servicio.Borrar(ss);
-                        MessageBox.Show("Registro Borrado Satisfactoriamente de ambas tablas",
-                                "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else if(dr==DialogResult.No)
-                    {
-                        MessageBox.Show("el Registro no fue borrado",
-                           "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else
-                {
-                    _servicio.Borrar(ss);
-                    MessageBox.Show("Registro Borrado Satisfactoriamente",
-                           "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
-
+                ShoeSize s = (ShoeSize)r.Tag;
+                var br = _servicio.GetShoeSizePorId(s.ShoeSizeId);
+                _servicio.Borrar(s);
+                MessageBox.Show("Registro Borrado Satisfactoriamente",
+                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RecargarGrilla();
             }
         }
@@ -152,10 +133,11 @@ namespace EFCore3Ferro
         {
             if (dataGridView1.SelectedRows.Count == 0) { return; }
             var r = dataGridView1.SelectedRows[0];
-            Shoes shoe = (Shoes)r.Tag;
-            var s = _servicio.GetShoePorId(shoe.ShoeId);
-            frmShoesAE frm = new frmShoesAE(serviceProvider)
-            { Text = "Editar Shoe" };
+            ShoeSize shoe = (ShoeSize)r.Tag;
+            ShoeSize s = _servicio.GetShoeSizePorId(shoe.ShoeSizeId);
+            
+            frmShoeSizeAE frm = new frmShoeSizeAE(serviceProvider)
+            { Text = "Editar Shoe Size" };
             frm.SetShoe(shoe);
             DialogResult dr = frm.ShowDialog(this);
             if (DialogResult == DialogResult.Cancel)
@@ -188,7 +170,6 @@ namespace EFCore3Ferro
                 }
             }
             RecargarGrilla();
-
         }
 
         private void tsbActualizar_Click(object sender, EventArgs e)

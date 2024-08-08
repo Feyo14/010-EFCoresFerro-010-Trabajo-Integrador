@@ -39,6 +39,7 @@
             button10 = new Button();
             label1 = new Label();
             label2 = new Label();
+            btnshoeSize = new Button();
             SuspendLayout();
             // 
             // button1
@@ -149,11 +150,22 @@
             label2.TabIndex = 11;
             label2.Text = "EFCore 2 ferro";
             // 
+            // btnshoeSize
+            // 
+            btnshoeSize.Location = new Point(713, 74);
+            btnshoeSize.Name = "btnshoeSize";
+            btnshoeSize.Size = new Size(90, 91);
+            btnshoeSize.TabIndex = 12;
+            btnshoeSize.Text = "ShoeSize";
+            btnshoeSize.UseVisualStyleBackColor = true;
+            btnshoeSize.Click += btnshoeSize_Click;
+            // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnshoeSize);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button6);
@@ -185,5 +197,6 @@
         private Button button10;
         private Label label1;
         private Label label2;
+        private Button btnshoeSize;
     }
 }

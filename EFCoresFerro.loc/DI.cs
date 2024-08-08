@@ -30,6 +30,8 @@ public static class DI
             GeneroRepo>();
         servicios.AddScoped<IDeporteRep, DeporteRepo>();
         servicios.AddScoped<IZapatillaRepository, ZapatillaRepository>();
+        servicios.AddScoped<IRepositorioShoeSize, RepositorioShoeSize>();
+        servicios.AddScoped<IRepositorioSize, RepositorioSize>();
 
 
 
@@ -47,6 +49,8 @@ public static class DI
                ServicioMarca>();
         servicios.AddScoped<IServicioGenero, ServicioGenero>();
         servicios.AddScoped<IServicioZapatilla, ServicioZapatilla>();
+        servicios.AddScoped<IServicioShoeSize, ServicioShoeSize>();
+        servicios.AddScoped<IServicioSize, ServicioSize>();
 
 
         servicios.AddScoped<IUnitOfWork, UnitOfWork>();

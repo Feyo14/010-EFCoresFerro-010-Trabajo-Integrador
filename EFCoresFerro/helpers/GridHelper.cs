@@ -76,6 +76,12 @@ namespace EFCoresFerro.GUI.Helpers
                     //  r.Cells[0].Value = shoe.Model;
 
                     break;
+                case ShoeSize shoe:
+                    r.Cells[0].Value = shoe.Shoe.Descripcion;
+                    r.Cells[1].Value = shoe.Size.sizeNumber;
+                    r.Cells[2].Value = shoe.QuantityInStock.ToString("C");
+                
+                    break;
 
                 default:
                     break;

@@ -13,6 +13,10 @@ namespace EFCore3.DATOS.Interfaces
         void Editar(Shoes shoe);
         Shoes? GetShoePorId(int id);
         public bool existe(Shoes d);
+        Shoes? GetPorName(string descrip);
+        public bool existeShoeSize(int s);
+
+
 
     }
 }

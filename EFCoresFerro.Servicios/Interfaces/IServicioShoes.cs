@@ -16,5 +16,8 @@ namespace EFCore3.Servicios.Interfaces
         void Editar(Shoes shoe);
         Shoes? GetShoePorId(int id);
         public bool existe(Shoes d);
+        Shoes? GetPorName(string descrip);
+        public bool existeShoeSize(int s);
+
     }
 }
