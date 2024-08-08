@@ -68,15 +68,13 @@ namespace EFCore3.DATOS.Repositorio
                 return context.ShoeSize.Any(
 
                p => p.ShoeId == d.ShoeId &&
-                    p.SizeId == d.SizeId &&
-                    p.QuantityInStock == d.QuantityInStock);
+                    p.SizeId == d.SizeId);
             }
             else
             {
                 return context.ShoeSize.Any(
                      p => p.ShoeId == d.ShoeId &&
                         p.SizeId == d.SizeId &&
-                  p.QuantityInStock == d.QuantityInStock &&
                 p.ShoeSizeId != p.ShoeSizeId);
             }
         }
