@@ -99,7 +99,7 @@ namespace EFCore3Ferro
                 }
 
 
-
+                RecargarGrilla();
             }
             catch (Exception ex)
             {
@@ -156,7 +156,7 @@ namespace EFCore3Ferro
                     }
                     else
                     {
-                        MessageBox.Show("Shoe existente!!!", "Error",
+                        MessageBox.Show("Registro  existente!!!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 

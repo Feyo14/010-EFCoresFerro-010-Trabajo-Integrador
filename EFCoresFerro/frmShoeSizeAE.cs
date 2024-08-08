@@ -90,6 +90,7 @@ namespace EFCore3Ferro.GUI
         {
             CombosHelper.CargarComboShoes(Iserviceprovider, ref cboShoe);
             CombosHelper.CargarComboSize(Iserviceprovider, ref cboSize);
+            
 
         }
         protected override void OnLoad(EventArgs e)

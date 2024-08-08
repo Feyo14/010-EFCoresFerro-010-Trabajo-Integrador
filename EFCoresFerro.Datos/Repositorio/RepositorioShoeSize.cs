@@ -63,7 +63,7 @@ namespace EFCore3.DATOS.Repositorio
 
         public bool existe(ShoeSize d)
         {
-            if (d.ShoeId == 0)
+            if (d.ShoeSizeId == 0)
             {
                 return context.ShoeSize.Any(
 
@@ -74,8 +74,8 @@ namespace EFCore3.DATOS.Repositorio
             {
                 return context.ShoeSize.Any(
                      p => p.ShoeId == d.ShoeId &&
-                        p.SizeId == d.SizeId &&
-                p.ShoeSizeId != p.ShoeSizeId);
+                        p.SizeId == d.SizeId);
+             //   p.ShoeSizeId != p.ShoeSizeId);
             }
         }
 
