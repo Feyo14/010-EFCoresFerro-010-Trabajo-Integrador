@@ -16,12 +16,12 @@ namespace EFCore3Ferro.GUI
         private EFCore3.Entidades.Size size = new Size();
         private Shoes shoe = new Shoes();
         private readonly IServiceProvider Iserviceprovider;
-           private readonly EFCoresDbContext contex;
+        private readonly EFCoresDbContext contex;
         public frmShoeSizeAE(IServiceProvider serv)
         {
             Iserviceprovider = serv;
             InitializeComponent();
-            
+
         }
         public void SetShoe(ShoeSize shoes)
         {
@@ -84,13 +84,13 @@ namespace EFCore3Ferro.GUI
             }
             return valid;
         }
-    
+
 
         private void frmShoeSizeAE_Load(object sender, EventArgs e)
         {
             CombosHelper.CargarComboShoes(Iserviceprovider, ref cboShoe);
             CombosHelper.CargarComboSize(Iserviceprovider, ref cboSize);
-            
+
 
         }
         protected override void OnLoad(EventArgs e)
@@ -103,7 +103,7 @@ namespace EFCore3Ferro.GUI
                 cboSize.SelectedItem = shoes.Size.sizeNumber;
                 shoe = shoes.Shoe;
                 size = shoes.Size;
-              
+
             }
         }
 
@@ -114,7 +114,7 @@ namespace EFCore3Ferro.GUI
             if (cboShoe.SelectedIndex > 0)
             {
                 var sev = Iserviceprovider.GetService<IServicioShoes>();
-                shoe=sev.GetPorName((string)cboShoe.SelectedItem);
+                shoe = sev.GetPorName((string)cboShoe.SelectedItem);
             }
             else
             {
@@ -131,11 +131,19 @@ namespace EFCore3Ferro.GUI
             }
             else
             {
-               // size = null;
+                // size = null;
             }
 
         }
 
+        private void cboShoe_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
 
+        private void cboSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

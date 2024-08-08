@@ -109,6 +109,7 @@
             cboShoe.Size = new Size(121, 23);
             cboShoe.TabIndex = 15;
             cboShoe.SelectedIndexChanged += cboShoe_SelectedIndexChanged;
+            cboShoe.KeyPress += cboShoe_KeyPress;
             // 
             // cboSize
             // 
@@ -118,6 +119,7 @@
             cboSize.Size = new Size(121, 23);
             cboSize.TabIndex = 16;
             cboSize.SelectedIndexChanged += cboSize_SelectedIndexChanged;
+            cboSize.KeyPress += cboSize_KeyPress;
             // 
             // txtQuantityInStock
             // 
