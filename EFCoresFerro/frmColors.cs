@@ -65,6 +65,11 @@ namespace EFCore3Ferro
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Marca existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {
@@ -85,9 +90,14 @@ namespace EFCore3Ferro
                 var r = dataGridView1.SelectedRows[0];
                 Colors brand = (Colors)r.Tag;
                 var brands = servicio.GetColorsPorId(brand.ColorId);
-                servicio.Borrar(brands);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
+                DialogResult dr = MessageBox.Show($"desea borrar el {brand.ColorName} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    servicio.Borrar(brand);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
         }
@@ -114,10 +124,12 @@ namespace EFCore3Ferro
                     if (!servicio.existe(brands))
                     {
                         servicio.Agregar(brands);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                          MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        brands = brand;
                         MessageBox.Show("Color existente!!!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

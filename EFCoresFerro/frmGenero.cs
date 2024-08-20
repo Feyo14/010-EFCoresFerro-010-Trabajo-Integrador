@@ -93,6 +93,11 @@ namespace EFCoresFerro.Windows
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Genero existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {
@@ -114,9 +119,14 @@ namespace EFCoresFerro.Windows
                 var r = dataGridView1.SelectedRows[0];
                 Genero genero = (Genero)r.Tag;
                 var generos = _servicio.GetGeneroPorNombre(genero.GeneroName);
-                _servicio.Borrar(genero);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el {genero.GeneroName} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    _servicio.Borrar(genero);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
 
@@ -145,7 +155,8 @@ namespace EFCoresFerro.Windows
                     if (!_servicio.existe(generos))
                     {
                         _servicio.Agregar(generos);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

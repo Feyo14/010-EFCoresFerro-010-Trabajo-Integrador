@@ -87,6 +87,12 @@ namespace EFCoresFerro.Windows
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Marca existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                            
             }
             catch (Exception)
             {
@@ -107,9 +113,14 @@ namespace EFCoresFerro.Windows
                 var r = dataGridView1.SelectedRows[0];
                 Marca marca = (Marca)r.Tag;
                 var brands = _servicio.GetMarcaPorNombre(marca.MarcaName);
-                _servicio.Borrar(marca);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.MarcaName} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    _servicio.Borrar(marca);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
         }
@@ -136,7 +147,8 @@ namespace EFCoresFerro.Windows
                     if (!_servicio.existe(brands))
                     {
                         _servicio.Agregar(brands);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

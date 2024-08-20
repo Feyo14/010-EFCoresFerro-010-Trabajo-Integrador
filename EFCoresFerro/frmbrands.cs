@@ -90,6 +90,11 @@ namespace EFCore3Ferro
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Brand existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {
@@ -110,9 +115,14 @@ namespace EFCore3Ferro
                 var r = dataGridView1.SelectedRows[0];
                 Brands brand = (Brands)r.Tag;
                 var brands = serviciobrands.GetBrandsPorId(brand.BrandId);
-                serviciobrands.Borrar(brands);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.BrandName} seleccionado?",
+                   "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr==DialogResult.Yes)
+                {
+                    serviciobrands.Borrar(brands);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
         }
@@ -139,10 +149,12 @@ namespace EFCore3Ferro
                     if (!serviciobrands.existe(brands))
                     {
                         serviciobrands.Agregar(brands);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        brands = brand;
                         MessageBox.Show("Brand existente!!!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

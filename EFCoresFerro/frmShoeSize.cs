@@ -122,9 +122,14 @@ namespace EFCore3Ferro
                 var r = dataGridView1.SelectedRows[0];
                 ShoeSize s = (ShoeSize)r.Tag;
                 var br = _servicio.GetShoeSizePorId(s.ShoeSizeId);
-                _servicio.Borrar(s);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el size: {br.Size} seleccionado?",
+                "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    _servicio.Borrar(s);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
         }
@@ -152,7 +157,8 @@ namespace EFCore3Ferro
                     if (!_servicio.existe(s))
                     {
                         _servicio.Editar(s);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

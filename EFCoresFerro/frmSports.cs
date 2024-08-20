@@ -68,6 +68,11 @@ namespace EFCore3Ferro
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Sport existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {
@@ -88,9 +93,14 @@ namespace EFCore3Ferro
                 var r = dataGridView1.SelectedRows[0];
                 Sports brand = (Sports)r.Tag;
                 var brands = servicio.GetSportsPorId(brand.SportId);
-                servicio.Borrar(brands);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.SportName} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    servicio.Borrar(brands);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
         }
@@ -105,9 +115,7 @@ namespace EFCore3Ferro
             { Text = "Editar Sport" };
             frm.SetSport(brands);
             DialogResult dr = frm.ShowDialog(this);
-            if (DialogResult == DialogResult.Cancel)
-            { return; }
-            else
+            if (dr == DialogResult.OK)
             {
 
 
@@ -117,7 +125,8 @@ namespace EFCore3Ferro
                     if (!servicio.existe(brands))
                     {
                         servicio.Agregar(brands);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

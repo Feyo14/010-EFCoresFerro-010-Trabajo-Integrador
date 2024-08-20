@@ -66,6 +66,11 @@ namespace EFCore3Ferro
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Genre existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {
@@ -86,9 +91,14 @@ namespace EFCore3Ferro
                 var r = dataGridView1.SelectedRows[0];
                 Genre brand = (Genre)r.Tag;
                 var brands = servicio.GetGenrePorId(brand.GenreId);
-                servicio.Borrar(brands);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.GenreName} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    servicio.Borrar(brands);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
         }
@@ -115,7 +125,8 @@ namespace EFCore3Ferro
                     if (!servicio.existe(brands))
                     {
                         servicio.Agregar(brands);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

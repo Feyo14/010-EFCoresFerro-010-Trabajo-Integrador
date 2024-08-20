@@ -90,6 +90,11 @@ namespace EFCoresFerro.Windows
                         "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
+                else
+                {
+                    MessageBox.Show("Deporte existente!!!", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception)
             {
@@ -112,9 +117,14 @@ namespace EFCoresFerro.Windows
                 var r = dataGridView1.SelectedRows[0];
                 Deporte d = (Deporte)r.Tag;
                 var brands = _servicio.GetDeportePorNombre(d.DeporteName);
-                _servicio.Borrar(d);
-                MessageBox.Show("Registro Borrado Satisfactoriamente",
-                        "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.DeporteName} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    _servicio.Borrar(d);
+                    MessageBox.Show("Registro Borrado Satisfactoriamente",
+                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 RecargarGrilla();
             }
 
@@ -143,7 +153,8 @@ namespace EFCoresFerro.Windows
                     if (!_servicio.existe(d))
                     {
                         _servicio.Agregar(d);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

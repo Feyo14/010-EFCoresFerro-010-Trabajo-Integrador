@@ -138,10 +138,14 @@ namespace EFCore3Ferro
                 }
                 else
                 {
-                    _servicio.Borrar(ss);
-                    MessageBox.Show("Registro Borrado Satisfactoriamente",
-                           "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    DialogResult dr = MessageBox.Show($"desea borrar el {ss.Descripcion} seleccionado?",
+                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Yes)
+                    {
+                        _servicio.Borrar(ss);
+                        MessageBox.Show("Registro Borrado Satisfactoriamente",
+                               "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
 
                 RecargarGrilla();
@@ -170,7 +174,8 @@ namespace EFCore3Ferro
                     if (!_servicio.existe(s))
                     {
                         _servicio.Editar(s);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {

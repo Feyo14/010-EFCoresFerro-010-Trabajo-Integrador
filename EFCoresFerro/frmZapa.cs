@@ -384,11 +384,20 @@ namespace EFCoreFerro2.GUI
                 {
 
                     var zapatilla = _servicio.GetZapatillaPorId(z.ZapatillaId);
-                    _servicio.Borrar(zapatilla);
-                    MessageBox.Show("Registro Borrado Satisfactoriamente",
-                            "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    RecargarGrillDeTodasLasZapatillas();
-
+                    DialogResult dr = MessageBox.Show($"desea borrar la zapatilla {zapatilla.NombreZapatilla} seleccionado?",
+                "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Yes)
+                    {
+                        _servicio.Borrar(zapatilla);
+                        MessageBox.Show("Registro Borrado Satisfactoriamente",
+                                "mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        RecargarGrillDeTodasLasZapatillas();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Zapatilla existente!!!", "Error",
+                                              MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -425,7 +434,8 @@ namespace EFCoreFerro2.GUI
                     if (!_servicio.existe(s))
                     {
                         _servicio.Editar(s);
-
+                        MessageBox.Show("Registro Agregado!!!", "update",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
