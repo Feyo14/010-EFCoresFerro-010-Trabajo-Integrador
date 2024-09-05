@@ -24,6 +24,9 @@ namespace EFCore3Ferro
                InitializeComponent();
 
            }
+
+        corregir las entidades y no se pueden borrar los registros relaciona
+        dos agregarle un nuevo campo a la base y tildaro como desactivo.
            */
         public frmShoes(IServicioShoes? serv, IServiceProvider _serviceProvider)
         {

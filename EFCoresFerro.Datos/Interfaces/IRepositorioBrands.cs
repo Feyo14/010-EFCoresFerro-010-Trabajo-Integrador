@@ -1,4 +1,5 @@
 ﻿using EFCore3.Entidades;
+using System.Linq.Expressions;
 
 namespace EFCore3.DATOS.Interfaces
 {
@@ -11,6 +12,6 @@ namespace EFCore3.DATOS.Interfaces
         public bool existe(Brands brands);
         Brands? GetBrandsPorId(int BrandsId);
         Brands? GetPorName(string nombre);
-
+        IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter, Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy, string? propertiesNames);
     }
 }

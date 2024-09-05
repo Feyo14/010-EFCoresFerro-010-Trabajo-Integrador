@@ -1,4 +1,5 @@
-﻿using EFCoreFerro2.Datos;
+﻿using EFCore3.Entidades;
+using EFCoreFerro2.Datos;
 using EFCoreFerro2.Entidades.Dto;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace EFCoreFerro.Services.Services
         int GetCantidad(Func<Marca, bool>? filtro = null);
         List<Marca> GetLista();
         Marca? GetMarcaPorNombre(string nombre);
-
-
+        Marca? GetMarcaPorId(int b);
+        bool estarelacionado(int id);
     }
 }

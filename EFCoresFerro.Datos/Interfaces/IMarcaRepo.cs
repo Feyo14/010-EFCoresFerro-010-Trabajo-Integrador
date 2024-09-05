@@ -24,6 +24,8 @@ namespace EFCoreFerro2.Datos.Repositorio
         void Borrar(Marca g);
         void Editar(Marca g);
         public bool existe(Marca d);
+        Marca? GetMarcaPorId(int b);
+        bool estarelacionado(int id);
 
     }
 }

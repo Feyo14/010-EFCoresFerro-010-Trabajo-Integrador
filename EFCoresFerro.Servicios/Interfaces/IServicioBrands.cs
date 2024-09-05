@@ -1,9 +1,13 @@
 ﻿using EFCore3.Entidades;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Interfaces
 {
     public interface IServicioBrands
     {
+        IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter = null,
+          Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null,
+          string? propertiesNames = null);
         List<Brands> GetLista();
         void Agregar(Brands brands);
         void Borrar(Brands brands);

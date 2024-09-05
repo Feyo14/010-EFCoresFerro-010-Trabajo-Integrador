@@ -2,18 +2,19 @@
 using EFCore3.DATOS.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using EFCore3.Entidades;
+using EFCoresFerro.Datos.Repositorio;
 
 namespace EFCoresFerro.DATOS.Repositorio
 {
-    public class RepositorioBrands : IRepositorioBrands
+    public class RepositorioBrands : GenericRepository<Brands>, IRepositorioBrands
     {
         private readonly EFCoresDbContext context;
 
-        public RepositorioBrands(EFCoresDbContext context)
+        public RepositorioBrands(EFCoresDbContext db):base(db)
         {
-            this.context = context;
+            context = db ?? throw new ArgumentNullException(nameof(db));
         }
-      
+
         public void Agregar(Brands brands)
         {
             context.Brands.Add(brands);

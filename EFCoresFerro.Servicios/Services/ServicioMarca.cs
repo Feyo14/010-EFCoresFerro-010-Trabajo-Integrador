@@ -1,4 +1,5 @@
-﻿using EFCoreFerro2.Datos;
+﻿using EFCore3.Entidades;
+using EFCoreFerro2.Datos;
 using EFCoreFerro2.Datos.Repositorio;
 using EFCoreFerro2.Entidades.Dto;
 using EFCoresFerro.Datos;
@@ -94,6 +95,15 @@ namespace EFCoreFerro.Services.Services
         public Marca? GetMarcaPorNombre(string nombre)
         {
             return _repository.GetMarcaPorNombre(nombre);
+        }
+        public Marca? GetMarcaPorId(int b)
+        {
+            return _repository.GetMarcaPorId(b);
+        }
+
+        public bool estarelacionado(int id)
+        {
+            return _repository?.estarelacionado(id) ?? true;
         }
     }
 }

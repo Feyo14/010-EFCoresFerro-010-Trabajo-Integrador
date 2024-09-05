@@ -3,6 +3,7 @@ using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
 using EFCoresFerro.Datos;
 using EFCoresFerro.DATOS.Repositorio;
+using System.Linq.Expressions;
 
 namespace EFCore3.Servicios.Servicios
 {
@@ -87,6 +88,11 @@ namespace EFCore3.Servicios.Servicios
         public Brands? GetPorName(string nombre)
         {
             return repo.GetPorName(nombre);
+        }
+
+        public IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter = null, Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null, string? propertiesNames = null)
+        {
+            return repo!.GetAll(filter, orderBy, propertiesNames);
         }
     }
 

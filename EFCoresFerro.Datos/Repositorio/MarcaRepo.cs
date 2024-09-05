@@ -70,6 +70,17 @@ return _context.Marcas
         {
             _context.Marcas.Update(m);
         }
+
+        public Marca? GetMarcaPorId(int b)
+        {
+            return _context.Marcas
+                            .FirstOrDefault(t => t.MarcaId == b);
+        }
+
+        public bool estarelacionado(int id)
+        {
+            return _context.Zapatillas.Any(p => p.MarcaId == id);
+        }
     }
 
    
