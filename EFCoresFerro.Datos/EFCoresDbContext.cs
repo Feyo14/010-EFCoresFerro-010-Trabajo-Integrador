@@ -16,7 +16,7 @@ public partial class EFCoresDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Brands> Brands { get; set; }
+    public virtual DbSet<Brand> Brands { get; set; }
 
     public virtual DbSet<Colors> Colors { get; set; }
 
@@ -45,7 +45,7 @@ public partial class EFCoresDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
        
-        modelBuilder.Entity<Brands>(entity =>
+        modelBuilder.Entity<Brand>(entity =>
         {
             entity.ToTable("Brands");
 

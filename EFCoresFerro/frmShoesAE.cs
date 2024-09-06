@@ -11,7 +11,7 @@ namespace EFCore3Ferro.GUI
         private Shoes shoes;
         private Genre genre = new Genre();
         private Sports sports = new Sports();
-        private Brands brands = new Brands();
+        private Brand brands = new Brand();
         private readonly IServiceProvider Iserviceprovider;
         //   private readonly ServiceProvider serviceprovider;
 

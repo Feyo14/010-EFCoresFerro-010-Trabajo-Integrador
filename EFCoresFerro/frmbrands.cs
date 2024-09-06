@@ -9,7 +9,7 @@ namespace EFCore3Ferro
     public partial class frmBrands : Form
     {
         private readonly IServicioBrands serviciobrands;
-        private List<Brands> lista;
+        private List<Brand> lista;
 
 
         public frmBrands(IServicioBrands? s)
@@ -79,7 +79,7 @@ namespace EFCore3Ferro
             }
             try
             {
-                Brands brand = frm.GetBrand();
+                Brand brand = frm.GetBrand();
                 if (!serviciobrands.existe(brand))
                 {
                     serviciobrands.Agregar(brand);
@@ -113,7 +113,7 @@ namespace EFCore3Ferro
             else
             {
                 var r = dataGridView1.SelectedRows[0];
-                Brands brand = (Brands)r.Tag;
+                Brand brand = (Brand)r.Tag;
                 var brands = serviciobrands.GetBrandsPorId(brand.BrandId);
                 DialogResult dr = MessageBox.Show($"desea borrar el {brands.BrandName} seleccionado?",
                    "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -131,7 +131,7 @@ namespace EFCore3Ferro
         {
             if (dataGridView1.SelectedRows.Count == 0) { return; }
             var r = dataGridView1.SelectedRows[0];
-            Brands brand = (Brands)r.Tag;
+            Brand brand = (Brand)r.Tag;
             var brands = serviciobrands.GetBrandsPorId(brand.BrandId);
             frmBrandsAE frm = new frmBrandsAE(serviciobrands)
             { Text = "Editar Brand" };

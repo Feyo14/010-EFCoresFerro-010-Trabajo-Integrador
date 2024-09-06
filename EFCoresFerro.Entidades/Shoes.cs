@@ -16,7 +16,7 @@ namespace EFCore3.Entidades
 
         public string Descripcion { get; set; } = null!;
         public decimal Price { get; set; }
-        public Brands? brand { get; set; }
+        public Brand? brand { get; set; }
         public Sports? sport { get; set; }
         public Genre? genre { get; set; }
 

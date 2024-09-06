@@ -52,7 +52,7 @@ namespace EFCoresFerro.GUI.Helpers
                     r.Cells[3].Value = z.Deporte.DeporteName;
                     r.Cells[4].Value = z.Price.ToString("C");
                     break;
-                case Brands brands:
+                case Brand brands:
                     r.Cells[0].Value = brands.BrandName;
                     break;
                 case Colors color:

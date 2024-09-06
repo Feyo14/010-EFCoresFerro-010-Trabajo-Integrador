@@ -5,16 +5,16 @@ namespace EFCore3.Servicios.Interfaces
 {
     public interface IServicioBrands
     {
-        IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter = null,
-          Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null,
+        IEnumerable<Brand>? GetAll(Expression<Func<Brand, bool>>? filter = null,
+          Func<IQueryable<Brand>, IOrderedQueryable<Brand>>? orderBy = null,
           string? propertiesNames = null);
-        List<Brands> GetLista();
-        void Agregar(Brands brands);
-        void Borrar(Brands brands);
-        void Editar(Brands brands);
-        public bool existe(Brands b);
-        Brands? GetBrandsPorId(int b);
-        Brands? GetPorName(string nombre);
+        List<Brand> GetLista();
+        void Agregar(Brand brands);
+        void Borrar(Brand brands);
+        void Editar(Brand brands);
+        public bool existe(Brand b);
+        Brand? GetBrandsPorId(int b);
+        Brand? GetPorName(string nombre);
 
     }
 }

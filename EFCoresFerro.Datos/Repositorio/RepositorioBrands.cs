@@ -6,7 +6,7 @@ using EFCoresFerro.Datos.Repositorio;
 
 namespace EFCoresFerro.DATOS.Repositorio
 {
-    public class RepositorioBrands : GenericRepository<Brands>, IRepositorioBrands
+    public class RepositorioBrands : GenericRepository<Brand>, IRepositorioBrands
     {
         private readonly EFCoresDbContext context;
 
@@ -15,16 +15,16 @@ namespace EFCoresFerro.DATOS.Repositorio
             context = db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        public void Agregar(Brands brands)
+        public void Agregar(Brand brands)
         {
             context.Brands.Add(brands);
         }
 
-        public void Borrar(Brands brands)
+        public void Borrar(Brand brands)
         {
             context.Brands.Remove(brands);
         }
-        public bool existe(Brands brand)
+        public bool existe(Brand brand)
         {
             if (brand.BrandId == 0)
             {
@@ -36,13 +36,13 @@ namespace EFCoresFerro.DATOS.Repositorio
             }
 
         }
-        public void Editar(Brands brands)
+        public void Editar(Brand brands)
         {
             context.Brands.Update(brands);      
         }
 
         
-        public List<Brands> GetLista()
+        public List<Brand> GetLista()
         {
             return context.Brands
                 .OrderBy(p=>p.BrandName)
@@ -50,12 +50,12 @@ namespace EFCoresFerro.DATOS.Repositorio
 
                 .ToList();
         }
-        public Brands? GetBrandsPorId(int b)
+        public Brand? GetBrandsPorId(int b)
         {
             return context.Brands
                  .FirstOrDefault(t => t.BrandId == b);
         }
-        public Brands? GetPorName(string nombre)
+        public Brand? GetPorName(string nombre)
         {
             return context.Brands
                          .FirstOrDefault(te => te.BrandName == nombre);

@@ -24,7 +24,7 @@ namespace EFCoresFerro.Web.Controllers
 
             int pageNumber = page ?? 1;
             ViewBag.currentPageSize = pageSize;
-            IEnumerable<Brands>? brand;
+            IEnumerable<Brand>? brand;
             if (!viewAll)
             {
                 if (!string.IsNullOrEmpty(searchTerm))
@@ -80,7 +80,7 @@ namespace EFCoresFerro.Web.Controllers
             {
                 try
                 {
-                    Brands? marc = service.GetBrandsPorId(id.Value);
+                    Brand? marc = service.GetBrandsPorId(id.Value);
                     if (marc == null)
                     {
                         return NotFound();
@@ -117,7 +117,7 @@ namespace EFCoresFerro.Web.Controllers
 
             try
             {
-                Brands marc = _mapper.Map<Brands>(mar);
+                Brand marc = _mapper.Map<Brand>(mar);
 
                 if (service.existe(marc))
                 {
@@ -146,7 +146,7 @@ namespace EFCoresFerro.Web.Controllers
             {
                 return NotFound();
             }
-            Brands? category= service?.GetBrandsPorId(id.Value);
+            Brand? category= service?.GetBrandsPorId(id.Value);
             if (category is null)
             {
                 return NotFound();

@@ -5,13 +5,13 @@ namespace EFCore3Ferro.GUI
 {
     public partial class frmBrandsAE : Form
     {
-        private Brands Brand;
+        private Brand Brand;
         public frmBrandsAE(IServicioBrands service)
         {
             InitializeComponent();
         }
 
-        public Brands GetBrand()
+        public Brand GetBrand()
         {
             return Brand;
         }
@@ -22,7 +22,7 @@ namespace EFCore3Ferro.GUI
             {
                 if (Brand == null)
                 {
-                    Brand = new Brands();
+                    Brand = new Brand();
                 }
                 Brand.BrandName = textBox1.Text;
                 DialogResult = DialogResult.OK;
@@ -41,7 +41,7 @@ namespace EFCore3Ferro.GUI
             }
             return valid;
         }
-        public void SetBrand(Brands? brand)
+        public void SetBrand(Brand? brand)
         {
             this.Brand = brand;
         }

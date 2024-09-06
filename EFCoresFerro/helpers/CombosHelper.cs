@@ -165,14 +165,14 @@ namespace EFCoresFerro.GUI.Helpers
         {
             var servicio = serviceProvider.GetService<IServicioBrands>();
             var lista = servicio.GetLista();
-            var defaultbrand = new Brands
+            var defaultbrand = new Brand
             {
                 BrandName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultbrand);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Brands b in lista)
+            foreach (Brand b in lista)
             {
                 cbo.Items.Add(b.BrandName);
             }

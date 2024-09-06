@@ -5,7 +5,7 @@ namespace EFCore3.Entidades
 {
   //  [Index(nameof(BrandName), nameof(Brands.BrandName), IsUnique = true)]
 
-    public  class Brands
+    public  class Brand
     {
       
         public int BrandId { get; set; }

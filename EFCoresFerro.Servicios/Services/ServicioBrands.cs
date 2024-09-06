@@ -18,7 +18,7 @@ namespace EFCore3.Servicios.Servicios
             context=new EFCoresDbContext();
             repo = new RepositorioBrands(context);
         }
-        public void Agregar(Brands brands)
+        public void Agregar(Brand brands)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public void Borrar(Brands Brand)
+        public void Borrar(Brand Brand)
         {
             var BrandInDb = context.Brands.Find(Brand.BrandId);
             if (BrandInDb != null)
@@ -54,11 +54,11 @@ namespace EFCore3.Servicios.Servicios
             }
         }
 
-        public void Editar(Brands pais)
+        public void Editar(Brand pais)
         {
             throw new NotImplementedException();
         }
-        public bool existe(Brands b)
+        public bool existe(Brand b)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace EFCore3.Servicios.Servicios
         }
 
 
-        public List<Brands> GetLista()
+        public List<Brand> GetLista()
         {
             
                 return repo.GetLista(); 
@@ -80,17 +80,17 @@ namespace EFCore3.Servicios.Servicios
 
 
         }
-        public Brands? GetBrandsPorId(int b)
+        public Brand? GetBrandsPorId(int b)
         {
             return repo.GetBrandsPorId(b);
         }
 
-        public Brands? GetPorName(string nombre)
+        public Brand? GetPorName(string nombre)
         {
             return repo.GetPorName(nombre);
         }
 
-        public IEnumerable<Brands>? GetAll(Expression<Func<Brands, bool>>? filter = null, Func<IQueryable<Brands>, IOrderedQueryable<Brands>>? orderBy = null, string? propertiesNames = null)
+        public IEnumerable<Brand>? GetAll(Expression<Func<Brand, bool>>? filter = null, Func<IQueryable<Brand>, IOrderedQueryable<Brand>>? orderBy = null, string? propertiesNames = null)
         {
             return repo!.GetAll(filter, orderBy, propertiesNames);
         }
