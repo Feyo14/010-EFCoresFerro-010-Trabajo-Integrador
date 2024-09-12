@@ -14,5 +14,7 @@ namespace EFCore3.Entidades
         [StringLength(20)]
         public string SportName { get; set; } = null!;
         public ICollection<Shoes> shoes { get; set; } = new List<Shoes>();
+        public bool Active { get; set; }
+
     }
 }

@@ -19,6 +19,8 @@ namespace EFCore3.Entidades
         public Brand? brand { get; set; }
         public Sports? sport { get; set; }
         public Genre? genre { get; set; }
+        public bool Active { get; set; }
+
 
         public ICollection<ShoeSize> shoesize { get; set; } = new List<ShoeSize>();
 

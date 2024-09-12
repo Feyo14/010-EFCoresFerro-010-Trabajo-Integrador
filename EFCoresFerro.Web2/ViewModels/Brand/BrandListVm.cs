@@ -6,7 +6,7 @@ namespace EFCoresFerro.Web2.ViewModels.Brand.BrandListVm
     public class BrandListVm
     {
         public int BrandId { get; set; }
-        [DisplayName("Brand")]
+        [DisplayName("BrandName")]
 
         public string BrandName { get; set; } = null!;
 

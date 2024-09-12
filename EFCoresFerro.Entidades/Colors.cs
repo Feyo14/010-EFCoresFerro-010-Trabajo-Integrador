@@ -12,5 +12,7 @@ namespace EFCore3.Entidades
         public int ColorId { get; set; }
         [StringLength(50)]
         public string ColorName { get; set; } = null!;
+        public bool Active { get; set; }
+
     }
 }
