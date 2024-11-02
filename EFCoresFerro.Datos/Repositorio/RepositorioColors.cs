@@ -7,7 +7,7 @@ namespace EFCore3.DATOS.Repositorio
     public class RepositorioColors : IRepositorioColors
     {
         private readonly EFCoresDbContext context;
-
+        
         public RepositorioColors(EFCoresDbContext context)
         {
             this.context = context;

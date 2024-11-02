@@ -7,7 +7,7 @@ namespace EFCoresFerro
     internal static class Program
     {
         public static IServiceProvider? serviceProvider { get; private set; }
-
+        
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

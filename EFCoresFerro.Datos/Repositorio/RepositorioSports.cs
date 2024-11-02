@@ -7,7 +7,7 @@ namespace EFCore3.DATOS.Repositorio
     public class RepositorioSports : IRepositorioSports
     {
         private readonly EFCoresDbContext context;
-
+        
         public RepositorioSports(EFCoresDbContext context)
         {
             this.context = context;

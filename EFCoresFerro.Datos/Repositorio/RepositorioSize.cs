@@ -7,7 +7,7 @@ namespace EFCore3.DATOS.Repositorio
     public class RepositorioSize : IRepositorioSize
     {
         private readonly EFCoresDbContext context;
-
+        
         public RepositorioSize(EFCoresDbContext context)
         {
             this.context = context;

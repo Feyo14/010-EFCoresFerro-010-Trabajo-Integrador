@@ -209,7 +209,7 @@ namespace EFCore3.DATOS.Repositorio
                 return listaDto;
             
         }
-
+        
         public Shoes? GetPorName(string descrip)
         {
             return context.Shoes

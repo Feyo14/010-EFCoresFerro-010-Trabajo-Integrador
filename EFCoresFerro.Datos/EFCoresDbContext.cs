@@ -26,13 +26,6 @@ public partial class EFCoresDbContext : DbContext
     public virtual DbSet<Sports> Sports { get; set; }
 
 
-  //  public virtual DbSet<Deporte> Deportes { get; set; }
-
-//    public virtual DbSet<Genero> Generos { get; set; }
-
-   // public virtual DbSet<Marca> Marcas { get; set; }
-
-  //  public virtual DbSet<Zapatilla> Zapatillas { get; set; }
 
     public virtual DbSet<Size> Size { get; set; }
     public virtual DbSet<ShoeSize> ShoeSize { get; set; }
@@ -122,50 +115,6 @@ public partial class EFCoresDbContext : DbContext
             entity.Property(e => e.SportName).HasMaxLength(20);
         });
 
-        /*
-        modelBuilder.Entity<Deporte>(entity =>
-        {
-            entity.ToTable("Deporte");
-
-            entity.HasIndex(e => e.DeporteName, "IX_Deporte_Name");
-
-            entity.Property(e => e.DeporteName).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Genero>(entity =>
-        {
-            entity.ToTable("Genero");
-
-            entity.HasIndex(e => e.GeneroName, "IX_Genero_Name");
-
-            entity.Property(e => e.GeneroName).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Marca>(entity =>
-        {
-            entity.ToTable("Marca");
-
-            entity.HasIndex(e => e.MarcaId, "FK_Zapatilla_MarcaId");
-
-            entity.HasIndex(e => e.MarcaName, "IX_Marca_Name");
-
-            entity.Property(e => e.MarcaName).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Zapatilla>(entity =>
-        {
-            entity.ToTable("Zapatilla");
-
-            entity.Property(e => e.NombreZapatilla).HasMaxLength(50);
-            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
-
-            entity.HasOne(d => d.Deporte).WithMany(p => p.Zapatillas).HasForeignKey(d => d.DeporteId);
-
-            entity.HasOne(d => d.Genero).WithMany(p => p.Zapatillas).HasForeignKey(d => d.GeneroId);
-
-            entity.HasOne(d => d.Marca).WithMany(p => p.Zapatillas).HasForeignKey(d => d.MarcaId);
-        });
-        */
         modelBuilder.Entity<Size>(entity =>
         {
             entity.ToTable("Size");

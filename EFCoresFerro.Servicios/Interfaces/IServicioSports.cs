@@ -6,7 +6,7 @@ namespace EFCore3.Servicios.Interfaces
     {
         List<Sports> GetLista();
         void Agregar(Sports sports);
-        void Borrar(Sports sports);
+        void Borrar(Sports sports)
         void Editar(Sports sports);
         public bool existe(Sports b);
         Sports? GetSportsPorId(int b);
