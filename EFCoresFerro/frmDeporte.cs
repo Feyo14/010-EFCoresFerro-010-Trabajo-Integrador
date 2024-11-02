@@ -1,17 +1,15 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
 using EFCore3Ferro.GUI;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 using EFCoresFerro.GUI.Helpers;
 
 namespace EFCoresFerro.Windows
 {
     public partial class frmDeporte : Form
     {
-        private readonly IServicioDeporte _servicio;
-        private List<Deporte> lista;
-        public frmDeporte(IServicioDeporte servicio)
+        private readonly IServicioSports _servicio;
+        private List<Sports> lista;
+        public frmDeporte(IServicioSports servicio)
         {
             _servicio = servicio;
             InitializeComponent();
@@ -79,7 +77,7 @@ namespace EFCoresFerro.Windows
             }
             try
             {
-                Deporte d = frm.GetDeporte();
+                Sports d = frm.GetDeporte();
                 if (!_servicio.existe(d))
                 {
                     _servicio.Agregar(d);
@@ -115,9 +113,9 @@ namespace EFCoresFerro.Windows
             else
             {
                 var r = dataGridView1.SelectedRows[0];
-                Deporte d = (Deporte)r.Tag;
-                var brands = _servicio.GetDeportePorNombre(d.DeporteName);
-                DialogResult dr = MessageBox.Show($"desea borrar el {brands.DeporteName} seleccionado?",
+                Sports d = (Sports)r.Tag;
+                var brands = _servicio.GetPorName(d.SportName);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.SportName} seleccionado?",
                  "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
@@ -135,8 +133,8 @@ namespace EFCoresFerro.Windows
 
             if (dataGridView1.SelectedRows.Count == 0) { return; }
             var r = dataGridView1.SelectedRows[0];
-            Deporte deporte = (Deporte)r.Tag;
-            var d = _servicio.GetDeportePorNombre(deporte.DeporteName);
+            Sports deporte = (Sports)r.Tag;
+            var d = _servicio.GetPorName(deporte.SportName);
             frmDeporteAE frm = new frmDeporteAE(_servicio)
             { Text = "Editar Deporte" };
             frm.SetDeporte(d);

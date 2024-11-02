@@ -1,5 +1,4 @@
 ﻿using EFCore3.Entidades;
-using EFCoreFerro2.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -27,13 +26,13 @@ public partial class EFCoresDbContext : DbContext
     public virtual DbSet<Sports> Sports { get; set; }
 
 
-    public virtual DbSet<Deporte> Deportes { get; set; }
+  //  public virtual DbSet<Deporte> Deportes { get; set; }
 
-    public virtual DbSet<Genero> Generos { get; set; }
+//    public virtual DbSet<Genero> Generos { get; set; }
 
-    public virtual DbSet<Marca> Marcas { get; set; }
+   // public virtual DbSet<Marca> Marcas { get; set; }
 
-    public virtual DbSet<Zapatilla> Zapatillas { get; set; }
+  //  public virtual DbSet<Zapatilla> Zapatillas { get; set; }
 
     public virtual DbSet<Size> Size { get; set; }
     public virtual DbSet<ShoeSize> ShoeSize { get; set; }
@@ -123,7 +122,7 @@ public partial class EFCoresDbContext : DbContext
             entity.Property(e => e.SportName).HasMaxLength(20);
         });
 
-
+        /*
         modelBuilder.Entity<Deporte>(entity =>
         {
             entity.ToTable("Deporte");
@@ -166,6 +165,7 @@ public partial class EFCoresDbContext : DbContext
 
             entity.HasOne(d => d.Marca).WithMany(p => p.Zapatillas).HasForeignKey(d => d.MarcaId);
         });
+        */
         modelBuilder.Entity<Size>(entity =>
         {
             entity.ToTable("Size");

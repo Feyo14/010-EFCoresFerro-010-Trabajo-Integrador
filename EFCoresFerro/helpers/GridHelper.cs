@@ -1,7 +1,6 @@
 ﻿
 
 using EFCore3.Entidades;
-using EFCoreFerro2.Datos;
 using EFCoreFerro2.Entidades.Dto;
 
 namespace EFCoresFerro.GUI.Helpers
@@ -29,14 +28,14 @@ namespace EFCoresFerro.GUI.Helpers
         {
             switch (item)
             {
-                case Marca marca:
-                    r.Cells[0].Value = marca.MarcaName;
+                case Brand marca:
+                    r.Cells[0].Value = marca.BrandName;
             break;
-                case Deporte deporte:
-                    r.Cells[0].Value = deporte.DeporteName;
+                case Sports deporte:
+                    r.Cells[0].Value = deporte.SportName;
                     break;
-                case Genero genero:
-                    r.Cells[0].Value = genero.GeneroName;
+                case Genre genero:
+                    r.Cells[0].Value = genero.GenreName;
                     break;
                 case ZapatillalistDto z:
                     r.Cells[0].Value=z.NombreZapatilla;
@@ -45,27 +44,12 @@ namespace EFCoresFerro.GUI.Helpers
                     r.Cells[3].Value = z.Deporten;
                     r.Cells[4].Value = z.Precion.ToString("C");
                     break;
-                case Zapatilla z:
-                    r.Cells[0].Value = z.NombreZapatilla;
-                    r.Cells[1].Value = z.Marca.MarcaName;
-                    r.Cells[2].Value = z.Genero.GeneroName;
-                    r.Cells[3].Value = z.Deporte.DeporteName;
-                    r.Cells[4].Value = z.Price.ToString("C");
-                    break;
-                case Brand brands:
-                    r.Cells[0].Value = brands.BrandName;
-                    break;
+               
+              
                 case Colors color:
                     r.Cells[0].Value = color.ColorName;
                     break;
-                case Genre genre:
-                    r.Cells[0].Value = genre.GenreName;
-
-                    break;
-                case Sports sport:
-                    r.Cells[0].Value = sport.SportName;
-
-                    break;
+              
                 case Shoes shoe:
                     r.Cells[0].Value = shoe.brand.BrandName;
                     r.Cells[1].Value = shoe.sport.SportName;

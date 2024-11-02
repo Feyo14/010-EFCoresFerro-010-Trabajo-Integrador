@@ -2,6 +2,7 @@
 using EFCore3.DATOS.Repositorio;
 using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
+using EFCoreFerro2.Entidades.Dto;
 using EFCoresFerro.Datos;
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
@@ -108,11 +109,21 @@ private readonly EFCoresDbContext _dbContext;
             return repo.existeShoeSize(s);
         }
 
+        public int GetCantidad(Func<Shoes, bool>? filtro = null, Brand? m = null, Genre? g = null, Sports? d = null, decimal? max = null, decimal? min = null)
+        {
+            return repo.GetCantidad(filtro, m, g, d, max, min);
+        }
+
         public List<Shoes> GetLista()
         {
             
                 return repo.GetLista(); 
             
+        }
+
+        public List<ZapatillalistDto> GetListaPaginadaOrdenadaFiltradaporCombos(int page, int pageSize, Brand? marcafiltro = null, Genre? g = null, Sports? d = null, decimal? max = null, decimal? min = null)
+        {
+            return repo.GetListaPaginadaOrdenadaFiltradaporCombos(page, pageSize, marcafiltro, g, d, max, min);
         }
 
         public Shoes? GetPorName(string descrip)

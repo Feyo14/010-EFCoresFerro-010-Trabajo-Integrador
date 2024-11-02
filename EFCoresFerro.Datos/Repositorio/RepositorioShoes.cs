@@ -1,9 +1,11 @@
 ﻿using EFCore3.DATOS.Interfaces;
 using EFCore3.Entidades;
+using EFCoreFerro2.Entidades.Dto;
 using EFCoresFerro.Datos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Numerics;
+using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EFCore3.DATOS.Repositorio
@@ -102,6 +104,43 @@ namespace EFCore3.DATOS.Repositorio
                   p => p.ShoeId == s);
         }
 
+        public int GetCantidad(Func<Shoes, bool>? filtro = null, Brand? m = null, Genre? g = null, Sports? d = null, decimal? max = null, decimal? min = null)
+        {
+            IQueryable<Shoes> query = context.Shoes
+                   .Include(p => p.brand)
+                             .Include(p => p.genre)
+                                         .Include(p => p.sport)
+                   .AsNoTracking();
+
+            // Aplicar filtro si se proporciona un tipo de planta
+            if (m != null)
+            {
+                query = query
+                    .Where(p => p.BrandId == m.BrandId);
+            }
+            if (g != null)
+            {
+                query = query
+                    .Where(p => p.GenreId == g.GenreId);
+            }
+            if (d != null)
+            {
+                query = query
+                    .Where(p => p.SportId == d.SportId);
+            }
+            // Aplicar filtrado entre 2 precios cualquiera si se proporciona
+            if (max > 0 && min > 0)
+            {
+                query = query.Where(p => p.Price >= min && p.Price <= max);
+            }
+
+            List<Shoes> listaPaginada = query
+               .AsNoTracking()
+               .ToList();
+
+            return listaPaginada.Count;
+        }
+
         public List<Shoes> GetLista()
         {
             return context.Shoes
@@ -113,6 +152,62 @@ namespace EFCore3.DATOS.Repositorio
                 .ToList();
              //  .OrderBy(p=>p.Price)
         
+        }
+
+        public List<ZapatillalistDto> GetListaPaginadaOrdenadaFiltradaporCombos(int page, int pageSize, Brand? marcafiltro = null, Genre? generofiltro = null, Sports? Deportefiltro = null, decimal? max = null, decimal? min = null)
+        {
+     
+                IQueryable<Shoes> query = context.Shoes
+               .Include(p => p.brand)
+                         .Include(p => p.genre)
+                                     .Include(p => p.sport)
+               .AsNoTracking();
+
+                // Aplicar filtro si se proporciona un tipo de planta
+                if (marcafiltro != null)
+                {
+                    query = query
+                        .Where(p => p.BrandId == marcafiltro.BrandId);
+                }
+                if (generofiltro != null)
+                {
+                    query = query
+                        .Where(p => p.GenreId == generofiltro.GenreId);
+                }
+                if (Deportefiltro != null)
+                {
+                    query = query
+                        .Where(p => p.SportId == Deportefiltro.SportId);
+                }
+
+
+                // Aplicar filtrado entre 2 precios cualquiera si se proporciona
+                if (max > 0 && min > 0)
+                {
+                    query = query.Where(p => p.Price >= min && p.Price <= max);
+                }
+                // Paginar los resultados
+                List<Shoes> listaPaginada = query
+                    .AsNoTracking()
+                   .Skip(page * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Mapear los resultados a PlantaListDto
+                List<ZapatillalistDto> listaDto = listaPaginada
+                    .Select(p => new ZapatillalistDto
+                    {
+                        ZapatillaId = p.ShoeId,
+                        NombreZapatilla = p.Descripcion,
+                        Generon = p.genre.GenreName,
+                        Deporten = p.sport.SportName,
+                        Marcan = p.brand.BrandName,
+                        Precion = p.Price
+                    })
+                    .ToList();
+
+                return listaDto;
+            
         }
 
         public Shoes? GetPorName(string descrip)

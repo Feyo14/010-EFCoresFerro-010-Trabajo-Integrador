@@ -1,23 +1,21 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
 using EFCore3Ferro.GUI;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 using EFCoresFerro.GUI.Helpers;
 
 namespace EFCoresFerro.Windows
 {
     public partial class frmGenero : Form
     {
-        private readonly IServicioGenero _servicio;
-        private List<Genero> lista;
-        public frmGenero(IServicioGenero servicio)
+        private readonly IServicioGenre _servicio;
+        private List<Genre> lista;
+        public frmGenero(IServicioGenre servicio)
         {
             _servicio = servicio;
             InitializeComponent();
         }
 
-        public frmGenero(IServicioGenero? servicio, IServiceProvider serviceProvider)
+        public frmGenero(IServicioGenre? servicio, IServiceProvider serviceProvider)
         {
             _servicio = servicio;
             InitializeComponent();
@@ -82,7 +80,7 @@ namespace EFCoresFerro.Windows
             }
             try
             {
-                Genero g = frm.GetGenero();
+                Genre g = frm.GetGenero();
                 if (!_servicio.existe(g))
                 {
                     _servicio.Agregar(g);
@@ -117,9 +115,9 @@ namespace EFCoresFerro.Windows
             else
             {
                 var r = dataGridView1.SelectedRows[0];
-                Genero genero = (Genero)r.Tag;
-                var generos = _servicio.GetGeneroPorNombre(genero.GeneroName);
-                DialogResult dr = MessageBox.Show($"desea borrar el {genero.GeneroName} seleccionado?",
+                Genre genero = (Genre)r.Tag;
+                var generos = _servicio.GetPorName(genero.GenreName);
+                DialogResult dr = MessageBox.Show($"desea borrar el {genero.GenreName} seleccionado?",
                  "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
@@ -137,8 +135,8 @@ namespace EFCoresFerro.Windows
 
             if (dataGridView1.SelectedRows.Count == 0) { return; }
             var r = dataGridView1.SelectedRows[0];
-            Genero genero = (Genero)r.Tag;
-            var generos = _servicio.GetGeneroPorNombre(genero.GeneroName);
+            Genre genero = (Genre)r.Tag;
+            var generos = _servicio.GetPorName(genero.GenreName);
             frmGeneroAE frm = new frmGeneroAE(_servicio)
             { Text = "Editar Genero" };
             frm.SetGenero(generos);

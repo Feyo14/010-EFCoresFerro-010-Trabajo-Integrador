@@ -1,21 +1,19 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 
 namespace EFCoresFerro.Windows
 {
     public partial class frmDeporteAE : Form
     {
-        private Deporte d;
-        private readonly IServicioDeporte servicio;
-        public frmDeporteAE(IServicioDeporte service)
+        private Sports d;
+        private readonly IServicioSports servicio;
+        public frmDeporteAE(IServicioSports service)
         {
             servicio = service;
             InitializeComponent();
         }
 
-        public Deporte GetDeporte()
+        public Sports GetDeporte()
         {
             return d;
         }
@@ -26,9 +24,9 @@ namespace EFCoresFerro.Windows
             {
                 if (d == null)
                 {
-                    d = new Deporte();
+                    d = new Sports();
                 }
-                d.DeporteName = textBox1.Text;
+                d.SportName = textBox1.Text;
                 DialogResult = DialogResult.OK;
 
             }
@@ -45,7 +43,7 @@ namespace EFCoresFerro.Windows
             }
             return valid;
         }
-        public void SetDeporte(Deporte? gen)
+        public void SetDeporte(Sports? gen)
         {
             this.d = gen;
         }
@@ -58,7 +56,7 @@ namespace EFCoresFerro.Windows
             base.OnLoad(e);
             if (d != null)
             {
-                textBox1.Text = d.DeporteName;
+                textBox1.Text = d.SportName;
             }
         }
     }

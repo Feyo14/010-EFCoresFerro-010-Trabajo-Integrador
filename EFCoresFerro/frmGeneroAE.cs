@@ -1,21 +1,19 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 
 namespace EFCoresFerro.Windows
 {
     public partial class frmGeneroAE : Form
     {
-        private Genero g;
-        private readonly IServicioGenero servicio;
-        public frmGeneroAE(IServicioGenero service)
+        private Genre g;
+        private readonly IServicioGenre servicio;
+        public frmGeneroAE(IServicioGenre service)
         {
             servicio = service;
             InitializeComponent();
         }
 
-        public Genero GetGenero()
+        public Genre GetGenero()
         {
             return g;
         }
@@ -26,9 +24,9 @@ namespace EFCoresFerro.Windows
             {
                 if (g == null)
                 {
-                   g= new Genero();
+                   g= new Genre();
                 }
-                g.GeneroName = textBox1.Text;
+                g.GenreName = textBox1.Text;
                 DialogResult = DialogResult.OK;
 
             }
@@ -45,7 +43,7 @@ namespace EFCoresFerro.Windows
             }
             return valid;
         }
-        public void SetGenero(Genero? gen)
+        public void SetGenero(Genre? gen)
         {
             this.g = gen;
         }
@@ -58,7 +56,7 @@ namespace EFCoresFerro.Windows
             base.OnLoad(e);
             if (g != null)
             {
-                textBox1.Text = g.GeneroName;
+                textBox1.Text = g.GenreName;
             }
         }
     }

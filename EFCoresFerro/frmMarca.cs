@@ -1,17 +1,14 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
-using EFCore3Ferro.GUI;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 using EFCoresFerro.GUI.Helpers;
 
 namespace EFCoresFerro.Windows
 {
     public partial class frmMarca : Form
     {
-        private readonly IServicioMarca _servicio;
-        private List<Marca> lista;
-        public frmMarca(IServicioMarca? servicio)
+        private readonly IServicioBrands _servicio;
+        private List<Brand> lista;
+        public frmMarca(IServicioBrands? servicio)
         {
             _servicio = servicio;
             InitializeComponent();
@@ -76,7 +73,7 @@ namespace EFCoresFerro.Windows
             }
             try
             {
-                Marca m = frm.GetMarca();
+                Brand m = frm.GetMarca();
                 if (!_servicio.existe(m))
                 {
                     _servicio.Agregar(m);
@@ -111,9 +108,9 @@ namespace EFCoresFerro.Windows
             else
             {
                 var r = dataGridView1.SelectedRows[0];
-                Marca marca = (Marca)r.Tag;
-                var brands = _servicio.GetMarcaPorNombre(marca.MarcaName);
-                DialogResult dr = MessageBox.Show($"desea borrar el {brands.MarcaName} seleccionado?",
+                Brand marca = (Brand)r.Tag;
+                var brands = _servicio.GetPorName(marca.BrandName);
+                DialogResult dr = MessageBox.Show($"desea borrar el {brands.BrandName} seleccionado?",
                  "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
@@ -129,8 +126,8 @@ namespace EFCoresFerro.Windows
         {
             if (dataGridView1.SelectedRows.Count == 0) { return; }
             var r = dataGridView1.SelectedRows[0];
-            Marca brand = (Marca)r.Tag;
-            var brands = _servicio.GetMarcaPorNombre(brand.MarcaName);
+            Brand brand = (Brand)r.Tag;
+            var brands = _servicio.GetPorName(brand.BrandName);
             frmMarcaAE frm = new frmMarcaAE(_servicio)
             { Text = "Editar Marca" };
             frm.SetMarca(brands);

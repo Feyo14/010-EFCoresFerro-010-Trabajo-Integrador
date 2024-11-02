@@ -1,7 +1,6 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
+using EFCore3.Servicios.Servicios;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Size = EFCore3.Entidades.Size;
@@ -23,19 +22,19 @@ namespace EFCoresFerro.GUI.Helpers
 
         public static void CargarComboMarcas( ref ToolStripComboBox cbo)
         {
-            var servicio = new ServicioMarca();
+            var servicio = new ServicioBrands();
 
             var lista = servicio.GetLista();
-            var defaultmarca = new Marca
+            var defaultmarca = new Brand
             {
-                MarcaName = "Seleccione"
+                BrandName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultmarca);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Marca marca in lista)
+            foreach (Brand marca in lista)
             {
-                cbo.Items.Add(marca.MarcaName);
+                cbo.Items.Add(marca.BrandName);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
@@ -47,19 +46,19 @@ namespace EFCoresFerro.GUI.Helpers
 
         public static void cargarComboGenero(ref ToolStripComboBox cbo)
         {
-            var servicio = new ServicioGenero();
+            var servicio = new ServicioGenre();
 
             var lista = servicio.GetLista();
-            var defaultgenero = new Genero
+            var defaultgenero = new Genre
             {
-                GeneroName = "Seleccione"
+                GenreName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultgenero);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Genero g in lista)
+            foreach (Genre g in lista)
             {
-                cbo.Items.Add(g.GeneroName);
+                cbo.Items.Add(g.GenreName);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
@@ -71,19 +70,19 @@ namespace EFCoresFerro.GUI.Helpers
 
         internal static void CargarComboDeporte(ref ToolStripComboBox cbo)
         {
-            var servicio = new ServicioDeporte();
+            var servicio = new ServicioSports();
 
             var lista = servicio.GetLista();
-            var defaultdeporte = new Deporte
+            var defaultdeporte = new Sports
             {
-                DeporteName = "Seleccione"
+                SportName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultdeporte);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Deporte d in lista)
+            foreach (Sports d in lista)
             {
-                cbo.Items.Add(d.DeporteName);
+                cbo.Items.Add(d.SportName);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
@@ -94,18 +93,18 @@ namespace EFCoresFerro.GUI.Helpers
         }
         public static void CargarComboMarcaBox(IServiceProvider serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<IServicioMarca>();
+            var servicio = serviceProvider.GetService<IServicioBrands>();
             var lista = servicio.GetLista();
-            var defaultmarca = new Marca
+            var defaultmarca = new Brand
             {
-                MarcaName = "Seleccione"
+                BrandName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultmarca);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Marca b in lista)
+            foreach (Brand b in lista)
             {
-                cbo.Items.Add(b.MarcaName);
+                cbo.Items.Add(b.BrandName);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
@@ -117,18 +116,18 @@ namespace EFCoresFerro.GUI.Helpers
         }
         public static void CargarComboGeneroBox(IServiceProvider serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<IServicioGenero>();
+            var servicio = serviceProvider.GetService<IServicioGenre>();
             var lista = servicio.GetLista();
-            var defaultgenero = new Genero
+            var defaultgenero = new Genre
             {
-                GeneroName = "Seleccione"
+                GenreName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultgenero);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Genero b in lista)
+            foreach (Genre b in lista)
             {
-                cbo.Items.Add(b.GeneroName);
+                cbo.Items.Add(b.GenreName);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos
@@ -140,18 +139,18 @@ namespace EFCoresFerro.GUI.Helpers
         }
         public static void CargarComboDeporteBox(IServiceProvider serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<IServicioDeporte>();
+            var servicio = serviceProvider.GetService<IServicioSports>();
             var lista = servicio.GetLista();
-            var defaultdeporte = new Deporte
+            var defaultdeporte = new Sports
             {
-                DeporteName = "Seleccione"
+                SportName = "Seleccione"
             };
             cbo.Items.Clear();
             lista.Insert(0, defaultdeporte);
             // Agregar los tipos de envases al ToolStripComboBox
-            foreach (Deporte b in lista)
+            foreach (Sports b in lista)
             {
-                cbo.Items.Add(b.DeporteName);
+                cbo.Items.Add(b.SportName);
             }
 
             // Seleccionar el primer elemento del ToolStripComboBox si hay elementos

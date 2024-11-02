@@ -1,7 +1,6 @@
 ﻿
 
 using EFCore3.Entidades;
-using EFCoreFerro2.Datos;
 
 namespace EFCore3.DATOS.Interfaces
 {

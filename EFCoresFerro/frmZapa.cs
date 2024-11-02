@@ -1,7 +1,8 @@
 ﻿using EFCore3.Entidades;
+using EFCore3.Servicios.Interfaces;
+using EFCore3.Servicios.Servicios;
 using EFCore3Ferro.GUI;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
+
 using EFCoreFerro2.Entidades.Dto;
 using EFCoreFerro2.GUI.Helpers;
 using EFCoresFerro.GUI.Helpers;
@@ -24,14 +25,14 @@ namespace EFCoreFerro2.GUI
 {
     public partial class frmZapa : Form
     {
-        private readonly IServicioZapatilla _servicio;
+        private readonly IServicioShoes _servicio;
         private List<ZapatillalistDto>? lista;
         private readonly IServiceProvider provider;
         //  private string? zapanombre = null;
 
-        private Marca? TipoMarca = null;
-        private Genero? TipoGenero = null;
-        private Deporte? TipoDeporte = null;
+        private Brand? TipoMarca = null;
+        private Genre? TipoGenero = null;
+        private Sports? TipoDeporte = null;
         //   private decimal? precio = null;
         private bool FilterOn = false;
         decimal max = 0;
@@ -47,7 +48,7 @@ namespace EFCoreFerro2.GUI
             _servicio = new ServicioZapatilla();
         }
         */
-        public frmZapa(IServicioZapatilla? servicioZapatilla, IServiceProvider serviceProvider)
+        public frmZapa(IServicioShoes? servicioZapatilla, IServiceProvider serviceProvider)
         {
             _servicio = servicioZapatilla;
             provider = serviceProvider;
@@ -113,13 +114,13 @@ namespace EFCoreFerro2.GUI
             if (ComboMarca.SelectedIndex > 0)
             {
                 FilterOn = true;
-                var servicio = new ServicioMarca();
+                var servicio = new ServicioBrands();
                 TipoMarca = servicio?
-                    .GetMarcaPorNombre(ComboMarca.Text);
+                    .GetPorName(ComboMarca.Text);
 
                 // Definir el filtro
-                Func<Zapatilla, bool> filtro =
-                    p => p.Marca == TipoMarca;
+                Func<Shoes, bool> filtro =
+                    p => p.brand == TipoMarca;
 
                 // Obtener la cantidad de registros después de aplicar el filtro
                 recordCount = _servicio.GetCantidad(filtro);
@@ -215,13 +216,13 @@ namespace EFCoreFerro2.GUI
             if (ComboGenero.SelectedIndex > 0)
             {
                 FilterOn = true;
-                var servicio = new ServicioGenero();
+                var servicio = new ServicioGenre();
                 TipoGenero = servicio?
-                    .GetGeneroPorNombre(ComboGenero.Text);
+                    .GetPorName(ComboGenero.Text);
 
                 // Definir el filtro
-                Func<Zapatilla, bool> filtro =
-                    p => p.Genero == TipoGenero;
+                Func<Shoes, bool> filtro =
+                    p => p.genre == TipoGenero;
 
                 // Obtener la cantidad de registros después de aplicar el filtro
                 recordCount = _servicio.GetCantidad(filtro);
@@ -267,13 +268,13 @@ namespace EFCoreFerro2.GUI
             if (ComboDeporte.SelectedIndex > 0)
             {
                 FilterOn = true;
-                var servicio = new ServicioDeporte();
+                var servicio = new ServicioSports();
                 TipoDeporte = servicio?
-                    .GetDeportePorNombre(ComboDeporte.Text);
+                    .GetPorName(ComboDeporte.Text);
 
                 // Definir el filtro
-                Func<Zapatilla, bool> filtro =
-                    p => p.Deporte == TipoDeporte;
+                Func<Shoes, bool> filtro =
+                    p => p.sport == TipoDeporte;
 
                 // Obtener la cantidad de registros después de aplicar el filtro
                 recordCount = _servicio.GetCantidad(filtro);
@@ -334,7 +335,7 @@ namespace EFCoreFerro2.GUI
             if (df == DialogResult.Cancel) { return; }
             try
             {
-                Zapatilla g = frm.GetZapa();
+                Shoes g = frm.GetZapa();
 
                 if (!_servicio.existe(g))
                 {
@@ -376,15 +377,15 @@ namespace EFCoreFerro2.GUI
             {
                 var r = dgvDatos.SelectedRows[0];
                 ZapatillalistDto zz = (ZapatillalistDto)r.Tag;
-                Zapatilla z = new Zapatilla();
-                z.ZapatillaId = zz.ZapatillaId;
+                Shoes z = new Shoes();
+                z.ShoeId = zz.ZapatillaId;
 
 
                 if (!_servicio.existe(z))
                 {
 
-                    var zapatilla = _servicio.GetZapatillaPorId(z.ZapatillaId);
-                    DialogResult dr = MessageBox.Show($"desea borrar la zapatilla {zapatilla.NombreZapatilla} seleccionado?",
+                    var zapatilla = _servicio.GetShoePorId(z.ShoeId);
+                    DialogResult dr = MessageBox.Show($"desea borrar la zapatilla {zapatilla.Descripcion} seleccionado?",
                 "mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dr == DialogResult.Yes)
                     {
@@ -408,15 +409,15 @@ namespace EFCoreFerro2.GUI
             if (dgvDatos.SelectedRows.Count == 0) { return; }
             var r = dgvDatos.SelectedRows[0];
             ZapatillalistDto zapadt = (ZapatillalistDto)r.Tag;
-            Zapatilla s = new Zapatilla();
-            s = _servicio.GetZapatillaPorId(zapadt.ZapatillaId);
-            s.Deporte = new Deporte();
-            s.Genero = new Genero();
-            s.Marca = new Marca();
+            Shoes s = new Shoes();
+            s = _servicio.GetShoePorId(zapadt.ZapatillaId);
+            s.sport = new Sports();
+            s.genre = new Genre();
+            s.brand = new Brand();
 
-            s.Deporte.DeporteName = zapadt.Deporten;
-            s.Genero.GeneroName = zapadt.Generon;
-            s.Marca.MarcaName = zapadt.Marcan;
+            s.sport.SportName = zapadt.Deporten;
+            s.genre.GenreName = zapadt.Generon;
+            s.brand.BrandName = zapadt.Marcan;
 
             frmZapaAE frm = new frmZapaAE(provider)
             { Text = "Editar Zapatilla" };

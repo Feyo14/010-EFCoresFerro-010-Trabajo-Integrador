@@ -1,21 +1,19 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 
 namespace EFCoresFerro.Windows
 {
     public partial class frmMarcaAE : Form
     {
-        private Marca Marca;
-        private readonly IServicioMarca servicio;
-        public frmMarcaAE(IServicioMarca service)
+        private Brand Marca;
+        private readonly IServicioBrands servicio;
+        public frmMarcaAE(IServicioBrands service)
         {
             servicio = service;
             InitializeComponent();
         }
 
-        public Marca GetMarca()
+        public Brand GetMarca()
         {
             return Marca;
         }
@@ -26,9 +24,9 @@ namespace EFCoresFerro.Windows
             {
                 if (Marca == null)
                 {
-                    Marca = new Marca();
+                    Marca = new Brand();
                 }
-                Marca.MarcaName = textBox1.Text;
+                Marca.BrandName = textBox1.Text;
                 DialogResult = DialogResult.OK;
 
             }
@@ -45,7 +43,7 @@ namespace EFCoresFerro.Windows
             }
             return valid;
         }
-        public void SetMarca(Marca? gen)
+        public void SetMarca(Brand? gen)
         {
             this.Marca = gen;
         }
@@ -58,7 +56,7 @@ namespace EFCoresFerro.Windows
             base.OnLoad(e);
             if (Marca != null)
             {
-                textBox1.Text = Marca.MarcaName;
+                textBox1.Text = Marca.BrandName;
             }
         }
     }

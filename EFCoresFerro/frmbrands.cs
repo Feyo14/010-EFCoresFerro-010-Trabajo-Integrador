@@ -1,7 +1,6 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
 using EFCore3Ferro.GUI;
-using EFCoreFerro.Services.Services;
 using EFCoresFerro.GUI.Helpers;
 
 namespace EFCore3Ferro

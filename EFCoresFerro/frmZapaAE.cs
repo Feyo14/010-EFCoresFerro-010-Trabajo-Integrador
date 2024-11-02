@@ -1,8 +1,6 @@
 ﻿using EFCore3.Entidades;
 using EFCore3.Servicios.Interfaces;
 using EFCore3.Servicios.Servicios;
-using EFCoreFerro.Services.Services;
-using EFCoreFerro2.Datos;
 using EFCoresFerro.GUI.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,10 +8,10 @@ namespace EFCore3Ferro.GUI
 {
     public partial class frmZapaAE : Form
     {
-        private Zapatilla zapatilla;
-        private Genero genero = new Genero();
-        private Deporte deporte = new Deporte();
-        private Marca marca = new Marca();
+        private Shoes zapatilla;
+        private Genre genero = new Genre();
+        private Sports deporte = new Sports();
+        private Brand marca = new Brand();
         private readonly IServiceProvider Iserviceprovider;
         //   private readonly ServiceProvider serviceprovider;
 
@@ -23,7 +21,7 @@ namespace EFCore3Ferro.GUI
             InitializeComponent();
 
         }
-        public Zapatilla GetZapa()
+        public Shoes GetZapa()
         {
             return zapatilla;
         }
@@ -34,17 +32,17 @@ namespace EFCore3Ferro.GUI
             {
                 if (zapatilla == null)
                 {
-                    zapatilla = new Zapatilla();
+                    zapatilla = new Shoes();
                 }
 
 
-                zapatilla.Marca = marca;
-                zapatilla.Genero = genero;
-                zapatilla.Deporte = deporte;
-                zapatilla.DeporteId = deporte.DeporteId;
-                zapatilla.GeneroId = genero.GeneroId;
-                zapatilla.MarcaId = marca.MarcaId;
-                zapatilla.NombreZapatilla = txtdescripcion.Text;
+                zapatilla.brand = marca;
+                zapatilla.genre = genero;
+                zapatilla.sport = deporte;
+                zapatilla.SportId = deporte.SportId;
+                zapatilla.GenreId = genero.GenreId;
+                zapatilla.BrandId = marca.BrandId;
+                zapatilla.Descripcion = txtdescripcion.Text;
                 zapatilla.Price = decimal.Parse(txtprecio.Text);
 
                 DialogResult = DialogResult.OK;
@@ -89,7 +87,7 @@ namespace EFCore3Ferro.GUI
             }
             return valid;
         }
-        public void SetZapa(Zapatilla zapa)
+        public void SetZapa(Shoes zapa)
         {
             this.zapatilla = zapa;
         }
@@ -106,14 +104,14 @@ namespace EFCore3Ferro.GUI
             base.OnLoad(e);
             if (zapatilla != null)
             {
-                txtdescripcion.Text = zapatilla.NombreZapatilla.ToString();
+                txtdescripcion.Text = zapatilla.Descripcion.ToString();
                 txtprecio.Text = zapatilla.Price.ToString();
-                genero = zapatilla.Genero;
-                deporte = zapatilla.Deporte;
-                marca = zapatilla.Marca;
-                cboMarca.SelectedItem = zapatilla.Marca.MarcaName;
-                cboGenero.SelectedItem = zapatilla.Genero.GeneroName;
-                cboDeporte.SelectedItem = zapatilla.Deporte.DeporteName;
+                genero = zapatilla.genre;
+                deporte = zapatilla.sport;
+                marca = zapatilla.brand;
+                cboMarca.SelectedItem = zapatilla.brand.BrandName;
+                cboGenero.SelectedItem = zapatilla.genre.GenreName;
+                cboDeporte.SelectedItem = zapatilla.sport.SportName;
             }
         }
 
@@ -121,8 +119,8 @@ namespace EFCore3Ferro.GUI
         {
             if (cboMarca.SelectedIndex > 0)
             {
-                var serv = new ServicioMarca();
-                marca = serv.GetMarcaPorNombre((string)cboMarca.SelectedItem);
+                var serv = new ServicioBrands();
+                marca = serv.GetPorName((string)cboMarca.SelectedItem);
 
             }
             else
@@ -135,8 +133,8 @@ namespace EFCore3Ferro.GUI
         {
             if (cboDeporte.SelectedIndex > 0)
             {
-                var serv = new ServicioDeporte();
-                deporte = serv.GetDeportePorNombre((string)cboDeporte.SelectedItem);
+                var serv = new ServicioSports();
+                deporte = serv.GetPorName((string)cboDeporte.SelectedItem);
             }
             else
             {
@@ -148,8 +146,8 @@ namespace EFCore3Ferro.GUI
         {
             if (cboGenero.SelectedIndex > 0)
             {
-                var serv = new ServicioGenero();
-                genero = serv.GetGeneroPorNombre((string)cboGenero.SelectedItem);
+                var serv = new ServicioGenre();
+                genero = serv.GetPorName((string)cboGenero.SelectedItem);
             }
             else
             {
